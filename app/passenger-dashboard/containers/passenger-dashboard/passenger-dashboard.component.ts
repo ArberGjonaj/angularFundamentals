@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls:["passenger-dashboard.component.scss"],
   template: `
   <div>
-  <h3>Airline Passengers</h3>
+    <passenger-count></passenger-count>
+    <passenger-detail></passenger-detail>
+    <h3>Airline Passengers</h3>
       <ul>
         <li *ngFor="let Passenger of Passengers; let i = index">
           <span class="status" [class.checked-in]="Passenger.checkedIn"></span>
