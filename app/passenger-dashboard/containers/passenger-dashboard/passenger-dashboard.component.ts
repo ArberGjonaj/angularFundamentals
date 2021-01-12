@@ -14,10 +14,7 @@ import { Component, OnInit } from "@angular/core";
         (edit)="handleEdit($event)"
         (remove)="handleRemove($event)"
       >
-
       </passenger-detail>
-  
-
     </div>
   `,
 })
@@ -64,12 +61,21 @@ export class PassengerDashboardComponent implements OnInit {
         checkedIn: true,
         checkInDate: 15135125454235,
         children: null,
-      }];
+      },
+    ];
   }
-  handleRemove(event){
-  console.log(event)
+  handleRemove(event) {
+    this.passengers = this.passengers.filter((passenger: Passenger) => {
+      return passenger.id !== event.id;
+    });
   }
-  handleEdit(event){
-    console.log(event)
-    }
+  handleEdit(event) {
+    this.passengers = this.passengers.map((passenger: Passenger) => {
+      if (passenger.id === event.id) {
+        passenger = Object.assign({}, passenger, event);
+      }
+      return passenger;
+    });
+    console.log(this.passengers);
+  }
 }
