@@ -16,18 +16,28 @@ interface Passenger{
         <li *ngFor="let Passenger of Passengers;let i = index">
           <span
            class="status"
-           [class.checked-in]="Passenger.checkedIn" ></span>
-         {{i}}:{{Passenger.fullname}}
-        </li>
-      </ul>
-      <ul>
-        <li *ngFor="let Passenger of Passengers;let i = index">
-          <span
-           class="status"
            [ngClass]="{
              'checked-in':Passenger.checkedIn,
              'checked-out':!Passenger.checkedIn
              }"></span>
+         {{i}}:{{Passenger.fullname}}
+        </li>
+      </ul>
+      <h3>Airline Passengers</h3>
+      <ul>
+        <li *ngFor="let Passenger of Passengers;let i = index">
+          <span
+           class="status"
+           [style.backgroundColor]="(Passenger.checkedIn ? '#2ecc71':'#c0392b')"></span>
+         {{i}}:{{Passenger.fullname}}
+        </li>
+      </ul>
+      <h3>Airline Passengers</h3>
+      <ul>
+        <li *ngFor="let Passenger of Passengers;let i = index">
+          <span
+           class="status"
+           [ngStyle]="{backgroundColor:(Passenger.checkedIn ? '#2ecc71':'#c0392b')}"></span>
          {{i}}:{{Passenger.fullname}}
         </li>
       </ul>
