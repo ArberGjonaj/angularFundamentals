@@ -7,24 +7,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls:["passenger-dashboard.component.scss"],
   template: `
   <div>
-    <passenger-count></passenger-count>
-    <passenger-detail></passenger-detail>
-    <h3>Airline Passengers</h3>
+    <passenger-count
+    [items]="passengers">
+    </passenger-count>
+
+    <passenger-detail>
+    </passenger-detail>
+  
       <ul>
-        <li *ngFor="let Passenger of Passengers; let i = index">
-          <span class="status" [class.checked-in]="Passenger.checkedIn"></span>
-          {{ i }}:{{ Passenger.fullname }}
-          <p>{{ Passenger | json }}</p>
+        <li *ngFor="let passenger of passengers; let i = index">
+          <span class="status" [class.checked-in]="passenger.checkedIn"></span>
+          {{ i }}:{{ passenger.fullname }}
+          <p>{{ passenger | json }}</p>
           <div class="date">
             Check in date:
             {{
-              Passenger.checkInDate
-                ? (Passenger.checkInDate | date: "yMMMd" | uppercase)
+              passenger.checkInDate
+                ? (passenger.checkInDate | date: "yMMMd" | uppercase)
                 : "Not checked In"
             }}
           </div>
           <div class="children" >
-           Children: {{ Passenger.children?.length || 0 }}
+           Children: {{ passenger.children?.length || 0 }}
           </div>
         </li>
       </ul>
@@ -33,14 +37,14 @@ import { Component, OnInit } from '@angular/core';
   `
 })
 export class PassengerDashboardComponent implements OnInit{
-  Passengers: Passenger[] = [
+  passengers: Passenger[] = [
   ];
   constructor(){
 
   }
   ngOnInit(){
     console.log("ngOnInit")
-    this.Passengers=[
+    this.passengers=[
       {
         id: 1,
         fullname: "Stephen",
