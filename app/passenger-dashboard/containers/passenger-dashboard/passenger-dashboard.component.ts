@@ -11,16 +11,13 @@ import { Component, OnInit } from "@angular/core";
       <passenger-detail
         *ngFor="let passenger of passengers"
         [detail]="passenger"
+        (edit)="handleEdit($event)"
+        (remove)="handleRemove($event)"
       >
-      </passenger-detail>
 
-      <ul>
-        <li *ngFor="let passenger of passengers; let i = index">
-          <div class="children">
-            Children: {{ passenger.children?.length || 0 }}
-          </div>
-        </li>
-      </ul>
+      </passenger-detail>
+  
+
     </div>
   `,
 })
@@ -67,7 +64,12 @@ export class PassengerDashboardComponent implements OnInit {
         checkedIn: true,
         checkInDate: 15135125454235,
         children: null,
-      },
-    ];
+      }];
   }
+  handleRemove(event){
+  console.log(event)
+  }
+  handleEdit(event){
+    console.log(event)
+    }
 }
