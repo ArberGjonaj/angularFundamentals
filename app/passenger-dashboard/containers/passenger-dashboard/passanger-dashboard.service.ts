@@ -2,22 +2,24 @@ import { Injectable } from "@angular/core";
 import { Http, Response,Headers,RequestOptions } from "@angular/http";
 
 import { Observable } from "rxjs/observable";
-import "rxjs/add/operator/toPromise";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/catch";
+import "rxjs/add/observable/throw";
 import { Passenger } from "./../../Models/passenger.interface";
 const PASSENGER_API:string = "api/passengers";
 @Injectable()
 export class PassangerDasboardService {
   constructor(private http: Http) {}
-  getPassengers(): Promise<Passenger[]> {
+  getPassengers(): Observable<Passenger[]> {
     return this.http
     .get(PASSENGER_API)
-    .toPromise()
-    .then((response: Response) => {
+    .map((response: Response) => {
       return response.json();
-    });
+    })
+    .catch((error:any)=> Observable.throw(error.json()))
   }
 
-  updatePassenger(passenger:Passenger): Promise<Passenger> {
+  updatePassenger(passenger:Passenger): Observable<Passenger> {
     let headers=new Headers({
       "Content-Type":"Application/json"
     })
@@ -26,19 +28,21 @@ export class PassangerDasboardService {
     })
     return this.http
     .put(`${PASSENGER_API}/${passenger.id}`,passenger,requestOptions)
-    .toPromise()
-    .then((response: Response) => {
+    .map((response: Response) => {
       return response.json();
-    });
+    })
+    .catch((error:any)=> Observable.throw(error.json()))
+
   }
 
-  removePassenger(passenger:Passenger): Promise<Passenger> {
+  removePassenger(passenger:Passenger): Observable<Passenger> {
     return this.http
     .delete(`${PASSENGER_API}/${passenger.id}`,)
-    .toPromise()
-    .then((response: Response) => {
+    .map((response: Response) => {
       return response.json();
-    });
+    })
+    .catch((error:any)=> Observable.throw(error.json()))
+
   }
 
 }
