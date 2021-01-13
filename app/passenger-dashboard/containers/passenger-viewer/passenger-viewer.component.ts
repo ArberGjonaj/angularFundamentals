@@ -9,8 +9,10 @@ import { Passenger } from './../../Models/passenger.interface';
   styleUrls: ['passenger-viewer.component.scss'],
   template:`
   <div>
-   {{this.passenger | json }}
-  </div>
+   <passenger-form
+   [detail]="passenger">
+   </passenger-form>
+   </div>
   `
 })
 export class PassengerViewerComponent implements OnInit{
