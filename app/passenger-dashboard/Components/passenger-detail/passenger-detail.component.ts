@@ -1,5 +1,12 @@
 import { Passenger } from "./../../Models/passenger.interface";
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import {
+  Component,
+  OnChanges,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+} from "@angular/core";
 
 @Component({
   selector: "passenger-detail",
@@ -26,7 +33,7 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
             : "Not checked In"
         }}
       </div>
-      <div class="children">Children:{{detail.children?.length||0}}</div>
+      <div class="children">Children:{{ detail.children?.length || 0 }}</div>
       <button (click)="toggleEdit()">
         {{ editing ? "Done" : "Edit" }}
       </button>
@@ -34,7 +41,7 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
     </div>
   `,
 })
-export class PassengerDetailComponent {
+export class PassengerDetailComponent implements OnChanges, OnInit {
   @Input()
   detail: Passenger;
 
@@ -46,6 +53,15 @@ export class PassengerDetailComponent {
 
   editing: boolean = false;
 
+  ngOnChanges(changes) {
+    if (changes.detail) {
+      this.detail = Object.assign({}, changes.detail.currentValue);
+    }
+    console.log("onChanges");
+  }
+  ngOnInit() {
+    console.log("onInit");
+  }
   constructor() {}
 
   onNameChange(value: string) {
