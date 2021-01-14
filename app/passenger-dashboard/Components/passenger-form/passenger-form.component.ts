@@ -3,10 +3,10 @@ import { Passenger } from '../../Models/passenger.interface';
 import {Baggage} from '../../Models/baggage.interface'
 @Component({
     selector: `passenger-form`,
-    styleUrls: [`passenger-form.component.scss`],
+    styleUrls: ['passenger-form.component.scss'],
     template:`
     <form #form="ngForm" novalidate>
-     {{detail | json}}
+
     <div>
      Passenger name:
      <input
@@ -79,9 +79,9 @@ import {Baggage} from '../../Models/baggage.interface'
 
      </div>
 
-     <div>{{form.value|json}}</div>
-     <div>Valid:{{form.valid|json}}</div>
-     <div>Invalid:{{form.invalid|json}}</div>
+     <button type="submit" [disabled]="form.invalid">
+       Update Passanger
+     </button>
     </form>
 
     `
