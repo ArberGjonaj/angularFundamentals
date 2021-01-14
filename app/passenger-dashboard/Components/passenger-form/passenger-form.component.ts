@@ -6,13 +6,14 @@ import { Passenger } from '../../Models/passenger.interface';
     styleUrls: [`[passenger-form.component.scss]`],
     template:`
     <form #form="ngForm" novalidate>
-     {{detail |json}}
+     {{detail | json}}
     <div>
      Passenger name:
      <input
      type="text"
      name="fullname"
-     [ngModel]="detail?.fullname">
+     [ngModel]="detail?.fullname"
+    >
      </div>
 
      <div>
@@ -23,6 +24,36 @@ import { Passenger } from '../../Models/passenger.interface';
      [ngModel]="detail?.id">
      </div>
 
+      <div>
+
+      <label>
+      <input
+      type="radio"
+      [value]="true"
+      name="checkedIn"
+      [ngModel]="detail?.checkedIn"
+      (ngModelChange)="toggleCheckIn($event)">
+      Yes
+      </label>
+
+      <label>
+      <input
+      type="radio"
+      [value]="false"
+      name="checkedIn"
+      [ngModel]="detail?.checkedIn"
+      (ngModelChange)="toggleCheckIn($event)">
+      No
+      </label>
+
+      </div>
+      <div *ngIf="form.value.checkedIn">
+        Check In Date:
+        <input
+     type="number"
+     name="checkInDate"
+     [ngModel]="detail?.checkInDate">
+      </div>
      {{form.value|json}}
     </form>
 
@@ -32,4 +63,9 @@ import { Passenger } from '../../Models/passenger.interface';
 export class PassengerFormComponent{
   @Input()
     detail:Passenger;
+    toggleCheckIn(checkedIn:boolean){
+      if(checkedIn){
+        this.detail.checkInDate=Date.now()
+      }
+    }
 }
