@@ -3,7 +3,7 @@ import { Passenger } from '../../Models/passenger.interface';
 import {Baggage} from '../../Models/baggage.interface'
 @Component({
     selector: `passenger-form`,
-    styleUrls: [`[passenger-form.component.scss]`],
+    styleUrls: [`passenger-form.component.scss`],
     template:`
     <form #form="ngForm" novalidate>
      {{detail | json}}
@@ -12,8 +12,12 @@ import {Baggage} from '../../Models/baggage.interface'
      <input
      type="text"
      name="fullname"
+     required
+     #fullname="ngModel"
      [ngModel]="detail?.fullname"
-    >
+    ><div *ngIf="fullname.errors?.required && fullname.touched" class="error">
+      Passanger Name is Required
+    </div>
      </div>
 
      <div>
@@ -21,8 +25,14 @@ import {Baggage} from '../../Models/baggage.interface'
      <input
      type="number"
      name="Id"
+     required
+     #id="ngModel"
      [ngModel]="detail?.id">
+     <div *ngIf="id.errors?.required && id.dirty" class="error">
+      Passanger Id is Required
+    </div>
      </div>
+
 
       <div>
 
@@ -45,7 +55,7 @@ import {Baggage} from '../../Models/baggage.interface'
 
       <div>
       Luggage:
-      <!-- <select
+      <select
       name="baggage"
       [ngModel]="detail?.baggage">
         <option
@@ -54,9 +64,9 @@ import {Baggage} from '../../Models/baggage.interface'
         [selected]="item.key===detail?.baggage">
           {{item.value}}
 </option>
-</select> -->
+</select>
 
-<select
+<!-- <select
       name="baggage"
       [ngModel]="detail?.baggage">
         <option
@@ -65,11 +75,13 @@ import {Baggage} from '../../Models/baggage.interface'
 
           {{item.value}}
 </option>
-</select>
+</select> -->
 
      </div>
 
-     {{form.value|json}}
+     <div>{{form.value|json}}</div>
+     <div>Valid:{{form.valid|json}}</div>
+     <div>Invalid:{{form.invalid|json}}</div>
     </form>
 
     `
