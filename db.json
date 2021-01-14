@@ -15,11 +15,11 @@
       "checkInDate": 15135125454235
     },
     {
-      "id": 3,
       "fullname": "Arber",
+      "id": 3,
       "checkedIn": true,
-      "checkInDate": 15135125454235,
-      "baggage": ""
+      "baggage": "none",
+      "checkInDate": 15135125454235
     },
     {
       "id": 4,
